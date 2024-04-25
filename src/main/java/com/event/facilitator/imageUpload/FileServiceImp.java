@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.UUID;
 
 @Service
@@ -14,7 +15,7 @@ public class FileServiceImp implements FileService {
     @Override
     public String uploadImage(String path, MultipartFile file) throws IOException {
         //file name
-        String fileName = UUID.randomUUID().toString() + "_" +file.getOriginalFilename();
+        String fileName = UUID.randomUUID() + "_" +file.getOriginalFilename();
 
 
         //Full Path
@@ -31,7 +32,9 @@ public class FileServiceImp implements FileService {
         //File copy
 
         Files.copy(file.getInputStream(), Paths.get(filePath));
-        String absolutePath = "D:\\Project\\Development\\WEB_DEV_with_Spring\\facilitator\\";
-        return absolutePath+filePath;
+        String [] temp = filePath.split("\\\\");
+
+        return "/"+temp[temp.length-2]+"/"+temp[temp.length-1];
+
     }
 }

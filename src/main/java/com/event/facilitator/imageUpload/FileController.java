@@ -26,7 +26,7 @@ public class FileController {
 
         try {
             String  s = this.fileService.uploadImage(uploadDirectory,file);
-            return ResponseEntity.ok("File uploaded successfully "+s);
+            return ResponseEntity.ok(s);
         } catch (IOException e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload file");

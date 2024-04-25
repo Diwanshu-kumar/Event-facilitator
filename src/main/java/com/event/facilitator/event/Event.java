@@ -20,6 +20,15 @@ public class Event {
     private String description;
     private String  contactNumber;
     private String email;
+    private String imgSrc;
+
+    public String getImgSrc() {
+        return imgSrc;
+    }
+
+    public void setImgSrc(String imgSrc) {
+        this.imgSrc = imgSrc;
+    }
 
     public Event(
             int hallId, String city, String state,
@@ -27,7 +36,7 @@ public class Event {
             String hallName, String providerName, int noOfSeats,
             boolean acAvailable, int parkingCapacity, int price,
             boolean djAvailable, boolean alcoholAvailable,
-            String description, String  contactNumber, String email) {
+            String description, String  contactNumber, String email,String imgSrc) {
         this.hallId = hallId;
         this.city = city;
         this.state = state;
@@ -44,6 +53,7 @@ public class Event {
         this.description = description;
         this.contactNumber = contactNumber;
         this.email = email;
+        this.imgSrc = imgSrc;
     }
 
     public int getHallId() {

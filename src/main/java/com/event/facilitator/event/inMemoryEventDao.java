@@ -25,7 +25,9 @@ public class inMemoryEventDao {
                 false,
                 "this is great hotel",
                 "7371857426",
-                "kumardiwanhshu00@gmail.com"));
+                "kumardiwanhshu00@gmail.com",
+                ""));
+
         events.add(new Event(2,
                 "nalanda",
                 "Bihar",
@@ -41,7 +43,8 @@ public class inMemoryEventDao {
                 false,
                 "this is great hotel",
                 "8409654492",
-                "priyanshukumar446@gmail.com")
+                "priyanshukumar446@gmail.com",
+                "")
 
         );
     }
