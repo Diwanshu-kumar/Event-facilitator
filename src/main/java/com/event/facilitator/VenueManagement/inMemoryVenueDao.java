@@ -1,4 +1,4 @@
-package com.event.facilitator.event;
+package com.event.facilitator.VenueManagement;
 
 import org.springframework.stereotype.Repository;
 
@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 @Repository
-public class inMemoryEventDao {
-    private final List<Event> events = new ArrayList<>();
-    inMemoryEventDao(){
-        events.add( new Event(1,
+public class inMemoryVenueDao {
+    private final List<Venue> venues = new ArrayList<>();
+    inMemoryVenueDao(){
+        venues.add( new Venue(1,
                 "patna",
                 "Bihar",
                 803110,
@@ -28,7 +28,7 @@ public class inMemoryEventDao {
                 "kumardiwanhshu00@gmail.com",
                 ""));
 
-        events.add(new Event(2,
+        venues.add(new Venue(2,
                 "nalanda",
                 "Bihar",
                 803111,
@@ -48,29 +48,29 @@ public class inMemoryEventDao {
 
         );
     }
-    public Event save(Event event) {
-        events.add(event);
-        return event;
+    public Venue save(Venue venue) {
+        venues.add(venue);
+        return venue;
     }
 
-    public List<Event> findAllEvent(){
-        return events;
+    public List<Venue> findAllEvent(){
+        return venues;
     }
 
-    public Event findEventByID(int hallId) {
-        return events.stream().
-                filter(event -> hallId==event.getHallId()).findFirst().
+    public Venue findEventByID(int hallId) {
+        return venues.stream().
+                filter(venue -> hallId== venue.getHallId()).findFirst().
                 orElse(null);
     }
 
-    public Event update(Event event) {
-        var eventIndex = IntStream.range(0,events.size())
-                .filter(index -> events.get(index).getHallId()==event.getHallId()).findFirst()
+    public Venue update(Venue venue) {
+        var eventIndex = IntStream.range(0, venues.size())
+                .filter(index -> venues.get(index).getHallId()== venue.getHallId()).findFirst()
                 .orElse(-1);
 
         if(eventIndex>-1){
-            events.set(eventIndex,event);
-            return event;
+            venues.set(eventIndex, venue);
+            return venue;
         }
         return null;
     }
@@ -78,7 +78,7 @@ public class inMemoryEventDao {
     public void delete(int hallId) {
         var event = findEventByID(hallId);
         if(event!=null){
-            events.remove(event);
+            venues.remove(event);
         }
     }
 }

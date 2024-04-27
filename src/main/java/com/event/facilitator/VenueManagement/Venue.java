@@ -1,7 +1,7 @@
-package com.event.facilitator.event;
+package com.event.facilitator.VenueManagement;
 
-public class Event {
-    public Event() {
+public class Venue {
+    public Venue() {
     }
 //    private int providerId;
     private int hallId;
@@ -30,7 +30,7 @@ public class Event {
         this.imgSrc = imgSrc;
     }
 
-    public Event(
+    public Venue(
             int hallId, String city, String state,
             int pincode, String country,
             String hallName, String providerName, int noOfSeats,

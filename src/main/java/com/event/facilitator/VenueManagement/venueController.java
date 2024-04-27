@@ -1,4 +1,4 @@
-package com.event.facilitator.event;
+package com.event.facilitator.VenueManagement;
 
 import org.springframework.web.bind.annotation.*;
 
@@ -7,27 +7,27 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/api/v1/events")
-public class eventController {
-    private final EventService eventService;
-    public eventController(EventService eventService){
+public class venueController {
+    private final VenueService eventService;
+    public venueController(VenueService eventService){
         this.eventService = eventService;
     }
     @GetMapping
-    public List<Event> getAllEvent(){
+    public List<Venue> getAllEvent(){
         return eventService.findAllEvent();
     }
 
     @PostMapping
-    public Event save(@RequestBody Event event){
-        return eventService.save(event);
+    public Venue save(@RequestBody Venue venue){
+        return eventService.save(venue);
     }
     @GetMapping("/{hallId}")
-    public Event findEventById(@PathVariable int hallId){
+    public Venue findEventById(@PathVariable int hallId){
         return eventService.findEventByID(hallId);
     }
     @PutMapping
-    public Event update(@RequestBody Event event){
-        return eventService.update(event);
+    public Venue update(@RequestBody Venue venue){
+        return eventService.update(venue);
     }
 
     @DeleteMapping("/{hallId}")
