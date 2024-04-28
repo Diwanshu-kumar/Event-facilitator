@@ -6,32 +6,34 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-@RequestMapping("/api/v1/events")
+@RequestMapping("/api/v1/venue")
 public class venueController {
-    private final VenueService eventService;
-    public venueController(VenueService eventService){
-        this.eventService = eventService;
+    private final VenueService venueService;
+    public venueController(VenueService venueService){
+        this.venueService = venueService;
     }
     @GetMapping
-    public List<Venue> getAllEvent(){
-        return eventService.findAllEvent();
+    public List<Venue> getAllVenue(){
+        return venueService.findAllVenue();
     }
 
     @PostMapping
     public Venue save(@RequestBody Venue venue){
-        return eventService.save(venue);
-    }
-    @GetMapping("/{hallId}")
-    public Venue findEventById(@PathVariable int hallId){
-        return eventService.findEventByID(hallId);
-    }
-    @PutMapping
-    public Venue update(@RequestBody Venue venue){
-        return eventService.update(venue);
+        return venueService.save(venue);
     }
 
-    @DeleteMapping("/{hallId}")
-    public void delete(@PathVariable int hallId){
-        eventService.delete(hallId);
+    @GetMapping("/{venueId}")
+    public Venue findVenueByID(@PathVariable int venueId){
+        return venueService.findVenueByID(venueId);
+    }
+
+    @PutMapping
+    public Venue update(@RequestBody Venue venue){
+        return venueService.update(venue);
+    }
+
+    @DeleteMapping("/{venueId}")
+    public void delete(@PathVariable int venueId){
+        venueService.delete(venueId);
     }
 }

@@ -17,13 +17,13 @@ public class inMemoryVenueService implements VenueService {
     }
 
     @Override
-    public List<Venue> findAllEvent(){
-        return dao.findAllEvent();
+    public List<Venue> findAllVenue(){
+        return dao.findAllVenue();
     }
 
     @Override
-    public Venue findEventByID(int hallId) {
-        return dao.findEventByID(hallId);
+    public Venue findVenueByID(int hallId) {
+        return dao.findVenueByID(hallId);
     }
 
     @Override
@@ -32,7 +32,7 @@ public class inMemoryVenueService implements VenueService {
     }
 
     @Override
-    public void delete(int hallId) {
-        dao.delete(hallId);
+    public void delete(int venueId) {
+        dao.delete(venueId);
     }
 }

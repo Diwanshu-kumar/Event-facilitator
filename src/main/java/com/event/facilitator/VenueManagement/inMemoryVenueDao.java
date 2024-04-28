@@ -10,73 +10,75 @@ import java.util.stream.IntStream;
 public class inMemoryVenueDao {
     private final List<Venue> venues = new ArrayList<>();
     inMemoryVenueDao(){
-        venues.add( new Venue(1,
-                "patna",
+        venues.add( new Venue(
+                1,
+                1,
+                "maharajaHall",
+                "Nalanda",
+                "Nalanda",
                 "Bihar",
                 803110,
                 "India",
-                "maharajaHall",
-                "maharajaHallCompany",
                 58,
-                true,
-                58,
-                38000,
-                true,
-                false,
-                "this is great hotel",
+                23,
+                "ok",
+                "ok",
+                "rohit",
                 "7371857426",
                 "kumardiwanhshu00@gmail.com",
-                ""));
-
-        venues.add(new Venue(2,
-                "nalanda",
-                "Bihar",
-                803111,
-                "India",
-                "banquetHall",
-                "surajHotels",
-                108,
-                false,
-                39,
-                50000,
-                true,
-                false,
+                "",
                 "this is great hotel",
-                "8409654492",
-                "priyanshukumar446@gmail.com",
-                "")
+                38000));
+        venues.add( new Venue(
+                2,
+                1,
+                "benq",
+                "Nalanda",
+                "Nalanda",
+                "Bihar",
+                803110,
+                "India",
+                58,
+                23,
+                "ok",
+                "ok",
+                "rohit",
+                "7371857426",
+                "kumardiwanhshu00@gmail.com",
+                "",
+                "this is great hotel",
+                38000));
 
-        );
     }
     public Venue save(Venue venue) {
         venues.add(venue);
         return venue;
     }
 
-    public List<Venue> findAllEvent(){
+    public List<Venue> findAllVenue(){
         return venues;
     }
 
-    public Venue findEventByID(int hallId) {
+    public Venue findVenueByID(int venueId) {
         return venues.stream().
-                filter(venue -> hallId== venue.getHallId()).findFirst().
+                filter(venue -> venueId == venue.getVenueId()).findFirst().
                 orElse(null);
     }
 
     public Venue update(Venue venue) {
-        var eventIndex = IntStream.range(0, venues.size())
-                .filter(index -> venues.get(index).getHallId()== venue.getHallId()).findFirst()
+        var venueIndex = IntStream.range(0, venues.size())
+                .filter(index -> venues.get(index).getVenueId()== venue.getVenueId()).findFirst()
                 .orElse(-1);
 
-        if(eventIndex>-1){
-            venues.set(eventIndex, venue);
+        if(venueIndex >-1){
+            venues.set(venueIndex, venue);
             return venue;
         }
         return null;
     }
 
-    public void delete(int hallId) {
-        var event = findEventByID(hallId);
+    public void delete(int venueId) {
+        var event = findVenueByID(venueId);
         if(event!=null){
             venues.remove(event);
         }

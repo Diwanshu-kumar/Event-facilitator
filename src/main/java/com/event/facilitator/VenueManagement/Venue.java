@@ -1,67 +1,78 @@
 package com.event.facilitator.VenueManagement;
 
 public class Venue {
-    public Venue() {
-    }
-//    private int providerId;
-    private int hallId;
+    public Venue() {}
+
+    private int venueId;
+    private int providerId;
+    private String venueName;
     private String city;
+    private String district;
     private String state;
-    private int pincode;
+    private int pinCode;
     private String country;
-    private String hallName;
-    private String providerName;
     private int noOfSeats;
-    private boolean acAvailable;
     private int parkingCapacity;
-    private int price;
-    private boolean djAvailable;
-    private boolean alcoholAvailable;
-    private String description;
-    private String  contactNumber;
-    private String email;
+    private String acAvailable;
+    private String djAvailable;
+    private String managerName;
+    private String contactNumber;
+    private String managerEmail;
     private String imgSrc;
+    private String description;
+    private int price;
 
-    public String getImgSrc() {
-        return imgSrc;
-    }
-
-    public void setImgSrc(String imgSrc) {
-        this.imgSrc = imgSrc;
-    }
-
-    public Venue(
-            int hallId, String city, String state,
-            int pincode, String country,
-            String hallName, String providerName, int noOfSeats,
-            boolean acAvailable, int parkingCapacity, int price,
-            boolean djAvailable, boolean alcoholAvailable,
-            String description, String  contactNumber, String email,String imgSrc) {
-        this.hallId = hallId;
+    public Venue(int venueId, int providerId, String venueName, String city, String district, String state, int pinCode, String country, int noOfSeats, int parkingCapacity, String acAvailable, String djAvailable, String managerName, String contactNumber, String managerEmail, String imgSrc, String description, int price) {
+        this.venueId = venueId;
+        this.providerId = providerId;
+        this.venueName = venueName;
         this.city = city;
+        this.district = district;
         this.state = state;
-        this.pincode = pincode;
+        this.pinCode = pinCode;
         this.country = country;
-        this.hallName = hallName;
-        this.providerName = providerName;
         this.noOfSeats = noOfSeats;
-        this.acAvailable = acAvailable;
         this.parkingCapacity = parkingCapacity;
-        this.price = price;
+        this.acAvailable = acAvailable;
         this.djAvailable = djAvailable;
-        this.alcoholAvailable = alcoholAvailable;
-        this.description = description;
+        this.managerName = managerName;
         this.contactNumber = contactNumber;
-        this.email = email;
+        this.managerEmail = managerEmail;
         this.imgSrc = imgSrc;
+        this.description = description;
+        this.price = price;
     }
 
-    public int getHallId() {
-        return hallId;
+    public String getDistrict() {
+        return district;
     }
 
-    public void setHallId(int hallId) {
-        this.hallId = hallId;
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    public int getVenueId() {
+        return venueId;
+    }
+
+    public void setVenueId(int venueId) {
+        this.venueId = venueId;
+    }
+
+    public int getProviderId() {
+        return providerId;
+    }
+
+    public void setProviderId(int providerId) {
+        this.providerId = providerId;
+    }
+
+    public String getVenueName() {
+        return venueName;
+    }
+
+    public void setVenueName(String venueName) {
+        this.venueName = venueName;
     }
 
     public String getCity() {
@@ -80,12 +91,12 @@ public class Venue {
         this.state = state;
     }
 
-    public int getPincode() {
-        return pincode;
+    public int getPinCode() {
+        return pinCode;
     }
 
-    public void setPincode(int pincode) {
-        this.pincode = pincode;
+    public void setPinCode(int pinCode) {
+        this.pinCode = pinCode;
     }
 
     public String getCountry() {
@@ -96,36 +107,12 @@ public class Venue {
         this.country = country;
     }
 
-    public String getHallName() {
-        return hallName;
-    }
-
-    public void setHallName(String hallName) {
-        this.hallName = hallName;
-    }
-
-    public String getProviderName() {
-        return providerName;
-    }
-
-    public void setProviderName(String providerName) {
-        this.providerName = providerName;
-    }
-
     public int getNoOfSeats() {
         return noOfSeats;
     }
 
     public void setNoOfSeats(int noOfSeats) {
         this.noOfSeats = noOfSeats;
-    }
-
-    public boolean isAcAvailable() {
-        return acAvailable;
-    }
-
-    public void setAcAvailable(boolean acAvailable) {
-        this.acAvailable = acAvailable;
     }
 
     public int getParkingCapacity() {
@@ -136,28 +123,52 @@ public class Venue {
         this.parkingCapacity = parkingCapacity;
     }
 
-    public int getPrice() {
-        return price;
+    public String getAcAvailable() {
+        return acAvailable;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setAcAvailable(String acAvailable) {
+        this.acAvailable = acAvailable;
     }
 
-    public boolean isDjAvailable() {
+    public String getDjAvailable() {
         return djAvailable;
     }
 
-    public void setDjAvailable(boolean djAvailable) {
+    public void setDjAvailable(String djAvailable) {
         this.djAvailable = djAvailable;
     }
 
-    public boolean isAlcoholAvailable() {
-        return alcoholAvailable;
+    public String getManagerName() {
+        return managerName;
     }
 
-    public void setAlcoholAvailable(boolean alcoholAvailable) {
-        this.alcoholAvailable = alcoholAvailable;
+    public void setManagerName(String managerName) {
+        this.managerName = managerName;
+    }
+
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
+    }
+
+    public String getManagerEmail() {
+        return managerEmail;
+    }
+
+    public void setManagerEmail(String managerEmail) {
+        this.managerEmail = managerEmail;
+    }
+
+    public String getImgSrc() {
+        return imgSrc;
+    }
+
+    public void setImgSrc(String imgSrc) {
+        this.imgSrc = imgSrc;
     }
 
     public String getDescription() {
@@ -168,19 +179,11 @@ public class Venue {
         this.description = description;
     }
 
-    public String getContactNumber() {
-        return contactNumber;
+    public int getPrice() {
+        return price;
     }
 
-    public void setContactNumber(String  contactNumber) {
-        this.contactNumber = contactNumber;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setPrice(int price) {
+        this.price = price;
     }
 }
