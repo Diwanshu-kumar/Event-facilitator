@@ -5,13 +5,13 @@ import jakarta.persistence.*;
 @Entity
 @Table(name="Venue")
 public class Venue {
-    public Venue() {}
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int venueId;
     @Column(nullable = false)
     private int providerId;
     private String venueName;
+    private String venueType;
     private String city;
     private String district;
     private String state;
@@ -28,10 +28,11 @@ public class Venue {
     private String description;
     private int price;
 
-    public Venue(int venueId, int providerId, String venueName, String city, String district, String state, int pinCode, String country, int noOfSeats, int parkingCapacity, String acAvailable, String djAvailable, String managerName, String contactNumber, String managerEmail, String imgSrc, String description, int price) {
+    public Venue(int venueId, int providerId, String venueName, String venueType, String city, String district, String state, int pinCode, String country, int noOfSeats, int parkingCapacity, String acAvailable, String djAvailable, String managerName, String contactNumber, String managerEmail, String imgSrc, String description, int price) {
         this.venueId = venueId;
         this.providerId = providerId;
         this.venueName = venueName;
+        this.venueType = venueType;
         this.city = city;
         this.district = district;
         this.state = state;
@@ -47,6 +48,18 @@ public class Venue {
         this.imgSrc = imgSrc;
         this.description = description;
         this.price = price;
+    }
+
+    public Venue() {
+
+    }
+
+    public String getVenueType() {
+        return venueType;
+    }
+
+    public void setVenueType(String venueType) {
+        this.venueType = venueType;
     }
 
     public String getDistrict() {

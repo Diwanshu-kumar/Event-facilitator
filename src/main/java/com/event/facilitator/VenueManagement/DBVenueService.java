@@ -38,4 +38,9 @@ public class DBVenueService implements VenueService {
     public void delete(int venueId) {
         venRepo.deleteById(venueId);
     }
+
+    @Override
+    public List<Venue> findVenueByProviderId(int providerId) {
+        return venRepo.findVenueByProviderId(providerId);
+    }
 }

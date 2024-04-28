@@ -28,6 +28,11 @@ public class venueController {
         return venueService.findVenueByID(venueId);
     }
 
+    @GetMapping("/providerId/{providerId}")
+    public List<Venue> findVenueByProviderId(@PathVariable int providerId){
+        return venueService.findVenueByProviderId(providerId);
+    }
+
     @PutMapping
     public Venue update(@RequestBody Venue venue){
         return venueService.update(venue);

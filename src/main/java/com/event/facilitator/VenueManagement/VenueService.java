@@ -9,4 +9,6 @@ public interface VenueService {
     Venue findVenueByID(int venueId);
     Venue update(Venue venue);
     void delete(int venueId);
+
+    List<Venue> findVenueByProviderId(int providerId);
 }

@@ -35,4 +35,9 @@ public class inMemoryVenueService implements VenueService {
     public void delete(int venueId) {
         dao.delete(venueId);
     }
+
+    @Override
+    public List<Venue> findVenueByProviderId(int providerId) {
+        return List.of();
+    }
 }
