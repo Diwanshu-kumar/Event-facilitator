@@ -1,5 +1,6 @@
 package com.event.facilitator.VenueManagement;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
 @RequestMapping("/api/v1/venue")
 public class venueController {
     private final VenueService venueService;
-    public venueController(VenueService venueService){
+    public venueController(@Qualifier("DBVenueService") VenueService venueService){
         this.venueService = venueService;
     }
     @GetMapping

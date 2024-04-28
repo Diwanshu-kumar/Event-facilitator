@@ -1,9 +1,15 @@
 package com.event.facilitator.VenueManagement;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name="Venue")
 public class Venue {
     public Venue() {}
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int venueId;
+    @Column(nullable = false)
     private int providerId;
     private String venueName;
     private String city;
