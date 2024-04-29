@@ -4,7 +4,7 @@ public class ProviderDTO {
 
     private int providerId;
 
-    private String providerName;
+    private String fullName;
 
     private String email;
 
@@ -16,9 +16,9 @@ public class ProviderDTO {
     public ProviderDTO() {
     }
 
-    public ProviderDTO(int providerId, String providerName, String email, String mobileNumber, String gender, String password) {
+    public ProviderDTO(int providerId, String fullName, String email, String mobileNumber, String gender, String password) {
         this.providerId = providerId;
-        this.providerName = providerName;
+        this.fullName = fullName;
         this.email = email;
         this.mobileNumber = mobileNumber;
         this.gender = gender;
@@ -41,12 +41,12 @@ public class ProviderDTO {
         this.providerId = providerId;
     }
 
-    public String getProviderName() {
-        return providerName;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setProviderName(String providerName) {
-        this.providerName = providerName;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getEmail() {
