@@ -16,7 +16,7 @@ public class ProviderServiceIMPL implements ProviderService {
     public int addProvider(ProviderDTO providerDTO) {
         Provider provider = new Provider(
                 providerDTO.getProviderId(),
-                providerDTO.getProviderName(),
+                providerDTO.getFullName(),
                 providerDTO.getEmail(),
                 providerDTO.getMobileNumber(),
                 providerDTO.getGender(),

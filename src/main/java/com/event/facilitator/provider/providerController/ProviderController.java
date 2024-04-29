@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin
-@RequestMapping("/api/v1/events/admin")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
+@RequestMapping("/api/v1/venue/provider")
 public class ProviderController {
 
     @Autowired
