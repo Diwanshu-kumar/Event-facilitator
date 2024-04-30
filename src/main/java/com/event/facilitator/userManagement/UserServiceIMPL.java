@@ -1,6 +1,8 @@
 package com.event.facilitator.userManagement;
 
 import com.event.facilitator.provider.Dto.LoginDTO;
+import com.event.facilitator.provider.Dto.LoginResponseDTO;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -10,18 +12,18 @@ public class UserServiceIMPL implements UserService{
         this.userRepository = userRepository;
     }
     @Override
-    public int addUser(User user) {
-        if(userRepository.findByEmail(user.getEmail())!=null)return -1;
+    public ResponseEntity<String > addUser(User user) {
+        if(userRepository.findByEmail(user.getEmail())!=null)return ResponseEntity.ok("Duplicate Email");
         userRepository.save(user);
-        return user.getUserId();
+        return ResponseEntity.ok("User added successfully");
     }
 
     @Override
-    public String login(LoginDTO loginDTO) {
+    public LoginResponseDTO login(LoginDTO loginDTO) {
         User user =userRepository.findByEmail(loginDTO.getUsername());
         if(user!=null && user.getPassword().equals(loginDTO.getPassword())){
-            return user.getUserId()+" : "+user.getFullName();
+            return new LoginResponseDTO(user.getUserId(),user.getFullName());
         }
-        return null;
+        return new LoginResponseDTO();
     }
 }

@@ -1,11 +1,13 @@
 package com.event.facilitator.userManagement;
 
 import com.event.facilitator.provider.Dto.LoginDTO;
+import com.event.facilitator.provider.Dto.LoginResponseDTO;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
 public interface UserService {
-    int addUser(User user);
+    ResponseEntity<String > addUser(User user);
 
-    String login(LoginDTO loginDTO);
+    LoginResponseDTO login(LoginDTO loginDTO);
 }

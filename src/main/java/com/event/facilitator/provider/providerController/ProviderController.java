@@ -1,6 +1,7 @@
 package com.event.facilitator.provider.providerController;
 
 
+import com.event.facilitator.provider.Dto.LoginResponseDTO;
 import com.event.facilitator.provider.Dto.ProviderDTO;
 import com.event.facilitator.provider.Dto.LoginDTO;
 import com.event.facilitator.provider.service.ProviderService;
@@ -23,7 +24,7 @@ public class ProviderController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody LoginDTO loginDTO) {
+    public LoginResponseDTO login(@RequestBody LoginDTO loginDTO) {
         return providerService.login(loginDTO);
     }
 }

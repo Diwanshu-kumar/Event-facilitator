@@ -1,6 +1,7 @@
 package com.event.facilitator.provider.service;
 
 import com.event.facilitator.provider.Dto.LoginDTO;
+import com.event.facilitator.provider.Dto.LoginResponseDTO;
 import com.event.facilitator.provider.Dto.ProviderDTO;
 import com.event.facilitator.provider.Repo.ProviderRepo;
 import com.event.facilitator.provider.entity.Provider;
@@ -28,11 +29,11 @@ public class ProviderServiceIMPL implements ProviderService {
     }
 
     @Override
-    public String login(LoginDTO loginDTO) {
+    public LoginResponseDTO login(LoginDTO loginDTO) {
         Provider provider = providerRepo.findByEmail(loginDTO.getUsername());
         if(provider!=null && provider.getPassword().equals(loginDTO.getPassword())){
-            return provider.getProviderId()+" : "+provider.getProviderName();
+            return new LoginResponseDTO(provider.getProviderId(),provider.getProviderName());
         }
-        return null;
+        return new LoginResponseDTO();
     }
 }
