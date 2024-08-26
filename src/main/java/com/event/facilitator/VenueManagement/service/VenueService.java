@@ -27,6 +27,10 @@ public class VenueService {
     Random random = new Random();
     public List<VenueInfoDTO> getAllVenues() {
         List<Venue> venues = venueRepository.findAll();
+        return getLimitedVenuesInfo(venues);
+    }
+
+    private List<VenueInfoDTO> getLimitedVenuesInfo(List<Venue> venues){
         List<VenueInfoDTO> venueInfoDTOList = new ArrayList<>();
         for (Venue venue : venues) {
             VenueInfoDTO venueInfoDTO = new VenueInfoDTO(
@@ -35,6 +39,7 @@ public class VenueService {
                     venue.getCity(),
                     venue.getCapacity(),
                     venue.getPrice(),
+                    venue.getPhone(),
                     venue.getAmenities(),
                     venue.getImages().isEmpty()?null:venue.getImages().get(random.nextInt(venue.getImages().size())));
             venueInfoDTOList.add(venueInfoDTO);
@@ -77,11 +82,26 @@ public class VenueService {
         }
         venue.setImages(imageList);
         venue.setAmenities(amenities);
-        return venueRepository.save(venue);
+        venueRepository.save(venue);
     }
 
     public Venue getVenueById(long id) {
         return venueRepository.findVenuesById(id);
 
     }
+
+    public List<VenueInfoDTO> getVenueByName(String name){
+        List<Venue> venues =  venueRepository.findByNameContainingIgnoreCase(name);
+        return getLimitedVenuesInfo(venues);
+    }
+
+    public List<VenueInfoDTO> getVenueByType(String type){
+        List<Venue> venues = venueRepository.findByTypeContainingIgnoreCase(type);
+        return getLimitedVenuesInfo(venues);
+    }
+    public List<VenueInfoDTO> getVenueInfoByNameAndType(String name,String type){
+        List<Venue> venues = venueRepository.findByNameContainingIgnoreCaseAndType(name,type);
+        return getLimitedVenuesInfo(venues);
+    }
+
 }

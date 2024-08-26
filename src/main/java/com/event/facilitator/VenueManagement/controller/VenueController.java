@@ -2,9 +2,9 @@ package com.event.facilitator.VenueManagement.controller;
 
 import com.event.facilitator.VenueManagement.dto.VenueInfoDTO;
 import com.event.facilitator.VenueManagement.dto.VenueRequest;
+import com.event.facilitator.VenueManagement.dto.VenueSearchRequestDTO;
 import com.event.facilitator.VenueManagement.entity.Venue;
 import com.event.facilitator.VenueManagement.service.VenueService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,5 +45,25 @@ public class VenueController {
             return ResponseEntity.status(404).build();
         }
         return ResponseEntity.ok(venue);
+    }
+
+    @PostMapping("/resource/search")
+    public ResponseEntity<List<VenueInfoDTO>> getVenueInfoByFilter(@RequestBody VenueSearchRequestDTO venueSearchRequestDTO){
+//        System.out.println(venueSearchRequestDTO);
+        String venueName = venueSearchRequestDTO.name();
+        String type = venueSearchRequestDTO.type();
+        String date = venueSearchRequestDTO.date();
+
+        List<VenueInfoDTO> result = null;
+        if(!venueName.isEmpty() && !type.isEmpty() && !date.isEmpty()){
+
+        }else if(!venueName.isEmpty() && !type.isEmpty()){
+            result =venueService.getVenueInfoByNameAndType(venueName,type);
+        }else if(!venueName.isEmpty()){
+            result = venueService.getVenueByName(venueName);
+        }else if(!type.isEmpty()){
+            result = venueService.getVenueByType(type);
+        }
+        return  ResponseEntity.ok( result);
     }
 }
