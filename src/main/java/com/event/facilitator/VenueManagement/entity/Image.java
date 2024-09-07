@@ -10,6 +10,10 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "venue_id")
+    private Venue venue;
+
     private String fileName;
 
     @Lob

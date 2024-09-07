@@ -1,9 +1,6 @@
 package com.event.facilitator.VenueManagement.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Amenity {
@@ -12,6 +9,11 @@ public class Amenity {
     private Long id;
 
     private String name;
+
+
+    @ManyToOne
+    @JoinColumn(name = "venue_id")
+    private Venue venue;
 
     // Getters and Setters
 
