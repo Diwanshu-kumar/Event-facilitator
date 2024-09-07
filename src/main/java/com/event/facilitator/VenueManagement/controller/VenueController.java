@@ -1,5 +1,6 @@
 package com.event.facilitator.VenueManagement.controller;
 
+import com.event.facilitator.VenueManagement.dto.ImageDTO;
 import com.event.facilitator.VenueManagement.dto.VenueInfoDTO;
 import com.event.facilitator.VenueManagement.dto.VenueRequest;
 import com.event.facilitator.VenueManagement.dto.VenueSearchRequestDTO;
@@ -65,5 +66,16 @@ public class VenueController {
             result = venueService.getVenueByType(type);
         }
         return  ResponseEntity.ok( result);
+    }
+
+    @GetMapping("/resource/image")
+    public ResponseEntity<ImageDTO> getImage(@RequestParam long venueId){
+        return ResponseEntity.ok(venueService.getImage(venueId));
+    }
+
+    @GetMapping("/resource/images")
+    public ResponseEntity<List<ImageDTO>> getImages(@RequestParam long venueId){
+        List<ImageDTO> result = venueService.getAllImages(venueId);
+        return ResponseEntity.ok(result);
     }
 }

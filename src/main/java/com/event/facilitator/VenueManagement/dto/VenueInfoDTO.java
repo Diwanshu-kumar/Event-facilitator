@@ -16,7 +16,7 @@ public record VenueInfoDTO(
          String price,
          String phone,
 
-         Set<Amenity> amenities,
-         Image img
+         Set<Amenity> amenities
+//         Image img
 ) {
 }

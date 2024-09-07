@@ -1,11 +1,13 @@
 package com.event.facilitator.VenueManagement.service;
 
+import com.event.facilitator.VenueManagement.dto.ImageDTO;
 import com.event.facilitator.VenueManagement.dto.VenueInfoDTO;
 import com.event.facilitator.VenueManagement.dto.VenueRequest;
 import com.event.facilitator.VenueManagement.entity.Amenity;
 import com.event.facilitator.VenueManagement.entity.Image;
 import com.event.facilitator.VenueManagement.entity.Venue;
 import com.event.facilitator.VenueManagement.repository.AmenityRepository;
+import com.event.facilitator.VenueManagement.repository.ImageRepository;
 import com.event.facilitator.VenueManagement.repository.VenueRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,10 +20,12 @@ public class VenueService {
 
     private final VenueRepository venueRepository;
     private final AmenityRepository amenityRepository;
+    private final ImageRepository imageRepository;
 
-    public VenueService(VenueRepository venueRepository, AmenityRepository amenityRepository) {
+    public VenueService(VenueRepository venueRepository, AmenityRepository amenityRepository, ImageRepository imageRepository) {
         this.venueRepository = venueRepository;
         this.amenityRepository = amenityRepository;
+        this.imageRepository = imageRepository;
     }
 
     Random random = new Random();
@@ -40,8 +44,7 @@ public class VenueService {
                     venue.getCapacity(),
                     venue.getPrice(),
                     venue.getPhone(),
-                    venue.getAmenities(),
-                    venue.getImages().isEmpty()?null:venue.getImages().get(random.nextInt(venue.getImages().size())));
+                    venue.getAmenities());
             venueInfoDTOList.add(venueInfoDTO);
         }
         return venueInfoDTOList;
@@ -104,4 +107,17 @@ public class VenueService {
         return getLimitedVenuesInfo(venues);
     }
 
+    public ImageDTO getImage(long venueId) {
+        if(imageRepository.existsByVenueId(venueId)){
+            return imageRepository.findFirstByVenueId(venueId);
+        }
+        return new ImageDTO(null,null);
+    }
+
+    public List<ImageDTO> getAllImages(long venueId) {
+        if(imageRepository.existsByVenueId(venueId)){
+            return imageRepository.findByVenueId(venueId);
+        }
+        return new ArrayList<>();
+    }
 }
