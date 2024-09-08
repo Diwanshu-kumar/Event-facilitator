@@ -9,6 +9,10 @@ import com.event.facilitator.VenueManagement.entity.Venue;
 import com.event.facilitator.VenueManagement.repository.AmenityRepository;
 import com.event.facilitator.VenueManagement.repository.ImageRepository;
 import com.event.facilitator.VenueManagement.repository.VenueRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -29,25 +33,32 @@ public class VenueService {
     }
 
     Random random = new Random();
-    public List<VenueInfoDTO> getAllVenues() {
-        List<Venue> venues = venueRepository.findAll();
-        return getLimitedVenuesInfo(venues);
+    public Page<VenueInfoDTO> getAllVenues(int pageNo, int size) {
+        Pageable pageable = PageRequest.of(pageNo, size);
+        Page<Venue> venuePage = venueRepository.findAll(pageable);
+        return getLimitedVenuesInfo(venuePage);
     }
 
-    private List<VenueInfoDTO> getLimitedVenuesInfo(List<Venue> venues){
+    private Page<VenueInfoDTO> getLimitedVenuesInfo(Page<Venue> venues) {
         List<VenueInfoDTO> venueInfoDTOList = new ArrayList<>();
+
+        // Convert Venue to VenueInfoDTO
         for (Venue venue : venues) {
             VenueInfoDTO venueInfoDTO = new VenueInfoDTO(
-                    venue.getId()
-                    ,venue.getName(),
+                    venue.getId(),
+                    venue.getName(),
                     venue.getCity(),
                     venue.getCapacity(),
                     venue.getPrice(),
                     venue.getPhone(),
-                    venue.getAmenities());
+                    venue.getAmenities()
+            );
             venueInfoDTOList.add(venueInfoDTO);
         }
-        return venueInfoDTOList;
+
+        // Create a PageImpl object using the list and the original pageable object
+        Pageable pageable = venues.getPageable();
+        return new PageImpl<>(venueInfoDTOList, pageable, venues.getTotalElements());
     }
 
     public void saveVenueWithDetails(VenueRequest venueRequest) throws IOException {
@@ -93,17 +104,20 @@ public class VenueService {
 
     }
 
-    public List<VenueInfoDTO> getVenueByName(String name){
-        List<Venue> venues =  venueRepository.findByNameContainingIgnoreCase(name);
-        return getLimitedVenuesInfo(venues);
+    public Page<VenueInfoDTO> getVenueByName(String name, int pageNo, int pageSize){
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Page<Venue> venuePage = venueRepository.findByNameContainingIgnoreCase(name,pageable);
+        return getLimitedVenuesInfo(venuePage);
     }
 
-    public List<VenueInfoDTO> getVenueByType(String type){
-        List<Venue> venues = venueRepository.findByTypeContainingIgnoreCase(type);
+    public Page<VenueInfoDTO> getVenueByType(String type, int pageNo, int pageSize){
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Page<Venue> venues = venueRepository.findByTypeContainingIgnoreCase(type,pageable);
         return getLimitedVenuesInfo(venues);
     }
-    public List<VenueInfoDTO> getVenueInfoByNameAndType(String name,String type){
-        List<Venue> venues = venueRepository.findByNameContainingIgnoreCaseAndType(name,type);
+    public Page<VenueInfoDTO> getVenueInfoByNameAndType(String name, String type, int pageNo, int pageSize){
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        Page<Venue> venues = venueRepository.findByNameContainingIgnoreCaseAndType(name,type,pageable);
         return getLimitedVenuesInfo(venues);
     }
 

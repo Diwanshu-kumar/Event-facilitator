@@ -1,18 +1,17 @@
 package com.event.facilitator.VenueManagement.repository;
 
-import com.event.facilitator.VenueManagement.dto.VenueInfoDTO;
 import com.event.facilitator.VenueManagement.entity.Venue;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.List;
 
 public interface VenueRepository extends JpaRepository<Venue, Long> {
 
     Venue findVenuesById(long id);
 
-    List<Venue> findByNameContainingIgnoreCase(String name);
+    Page<Venue> findByNameContainingIgnoreCase(String name, Pageable pageable);
 
-    List<Venue> findByNameContainingIgnoreCaseAndType(String name, String type);
+    Page<Venue> findByNameContainingIgnoreCaseAndType(String name, String type,Pageable pageable);
 
-    List<Venue> findByTypeContainingIgnoreCase(String type);
+    Page<Venue> findByTypeContainingIgnoreCase(String type,Pageable pageable);
 }

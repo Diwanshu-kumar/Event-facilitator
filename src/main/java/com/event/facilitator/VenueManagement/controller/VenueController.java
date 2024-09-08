@@ -6,6 +6,7 @@ import com.event.facilitator.VenueManagement.dto.VenueRequest;
 import com.event.facilitator.VenueManagement.dto.VenueSearchRequestDTO;
 import com.event.facilitator.VenueManagement.entity.Venue;
 import com.event.facilitator.VenueManagement.service.VenueService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,8 +36,11 @@ public class VenueController {
     }
 
     @GetMapping("/venues")
-    public ResponseEntity<List<VenueInfoDTO>> getVenues(){
-        return ResponseEntity.ok(venueService.getAllVenues());
+    public ResponseEntity<Page<VenueInfoDTO>> getVenues(@RequestParam(defaultValue = "0") int pageNumber,
+                                                        @RequestParam(defaultValue = "3") int pageSize){
+        Page<VenueInfoDTO> venueInfoDTOPage = venueService.getAllVenues(pageNumber,pageSize);
+
+        return ResponseEntity.ok(venueInfoDTOPage);
     }
 
     @GetMapping("/details")
@@ -49,21 +53,23 @@ public class VenueController {
     }
 
     @PostMapping("/resource/search")
-    public ResponseEntity<List<VenueInfoDTO>> getVenueInfoByFilter(@RequestBody VenueSearchRequestDTO venueSearchRequestDTO){
+    public ResponseEntity<Page<VenueInfoDTO>> getVenueInfoByFilter(@RequestBody VenueSearchRequestDTO venueSearchRequestDTO,
+                                                                   @RequestParam(defaultValue = "0") int pageNumber,
+                                                                   @RequestParam(defaultValue = "2")int pageSize){
 //        System.out.println(venueSearchRequestDTO);
         String venueName = venueSearchRequestDTO.name();
         String type = venueSearchRequestDTO.type();
         String date = venueSearchRequestDTO.date();
 
-        List<VenueInfoDTO> result = null;
+        Page<VenueInfoDTO> result = null;
         if(!venueName.isEmpty() && !type.isEmpty() && !date.isEmpty()){
 
         }else if(!venueName.isEmpty() && !type.isEmpty()){
-            result =venueService.getVenueInfoByNameAndType(venueName,type);
+            result =venueService.getVenueInfoByNameAndType(venueName,type,pageNumber,pageSize);
         }else if(!venueName.isEmpty()){
-            result = venueService.getVenueByName(venueName);
+            result = venueService.getVenueByName(venueName,pageNumber,pageSize);
         }else if(!type.isEmpty()){
-            result = venueService.getVenueByType(type);
+            result = venueService.getVenueByType(type,pageNumber,pageSize);
         }
         return  ResponseEntity.ok( result);
     }
